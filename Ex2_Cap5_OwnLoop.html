@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript">
+
+const loop= function(its, test, update, body){
+	if (test(its)==true){
+    	 body(its);
+    }
+  else return
+  	loop(update(its),test,update,body)
+  
+
+}
+
+loop(3, n => n > 0, n => n - 1, console.log);
+
+    </script>
+    
+
+</html>

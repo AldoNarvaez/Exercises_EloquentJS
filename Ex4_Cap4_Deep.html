@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript">
+
+let obj1={here: {is: "an"}, object: 2};
+let obj2={here: {is: "an"}, object: 2};
+
+const deepEqual =function (obj1, obj2) {
+  
+  if(typeof obj1==typeof obj2){
+
+    if (Object.keys(obj1).length==Object.keys(obj2).length){
+
+        for(let i=0; i<Object.keys(obj1).length; i=i+1){
+
+          if(Object.keys(obj1)[i] in obj2){
+            if(typeof obj1[Object.keys(obj1)[i]]=="object" && obj1[Object.keys(obj1)[i]]!= null && typeof obj2[Object.keys(obj1)[i]]=="object" && obj2[Object.keys(obj1)[i]]!= null){
+              deepEqual(obj1[Object.keys(obj1)[i]],obj2[Object.keys(obj1)[i]]);
+            }
+            
+            else if (obj1[Object.keys(obj1)[i]]==obj2[Object.keys(obj1)[i]]){ return true}
+            else {return false}
+
+          }
+          else{return false}
+        }
+    }
+    else{return false}
+  }
+  else {return false}
+    }
+
+console.log(deepEqual(obj1,obj2))
+console.log(deepEqual(obj1, {here: 1, object: 2}));
+// → false
+console.log(deepEqual(obj1, {here: {is: "an"}, object: 2}));
+
+    </script>
+    
+
+</html>
