@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript">
+
+      const array=["A","B","C"];
+
+
+       const reverseArray = function(array){
+
+      const ar=[];
+
+      for (let i = array.length-1; i>=0; i=i-1) {
+         ar.push(array[i]);
+         
+
+     }
+
+      return (ar);
+
+      }
+
+      const reverseArrayInPlace = function(array){
+
+      let pr;
+      let ul;
+
+      for (let i=0; i < Math.trunc(array.length/2); i=i+1) {
+         pr = array[i];
+         ul = array[array.length-i-1];
+         array[i] = ul;
+         array[array.length-i-1]=pr;
+         
+
+     }
+
+      return (array);
+
+      }
+
+      console.log(array) //Original array
+      console.log(reverseArray(array)) //A different array inverted
+      console.log(array) //The same unchaged array
+      console.log(reverseArrayInPlace(array)) //The array inverted
+      console.log(array)//The original array modified
+
+
+    </script>
+    
+
+</html>
