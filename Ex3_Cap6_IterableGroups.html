@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript">
+ 
+
+class Group {
+  // Your code here.
+  constructor(range) {
+    this.group = range;
+  }
+  static from(range){
+      return new Group(range)
+    }
+  add(value){
+    if (this.group.includes(value)==false){
+      this.group.push(value);
+    }
+    }
+  delete(value){
+  if (this.group.includes(value)==true){
+    let i=this.group.findIndex(v=> v==value);
+    this.group.splice(i,1);
+  }
+  } 
+  has(value){
+    if (this.group.includes(value)==true){
+    return true}
+   else{return false}
+  }
+}
+
+let group = Group.from([10, 20]);
+console.log(group)
+//console.log(group.has(10));
+// → true
+//console.log(group.has(30));
+// → false
+group.add(15);
+console.log(group);
+//group.delete(10);
+console.log(group);
+console.log(group.has(10));
+
+class GroupIterator{
+  constructor(subgroup){
+    this.subgroup = subgroup;
+    this.initio = 0;
+    }
+  
+    next(){
+    if(this.initio >= this.subgroup.group.length){ return {done: true};}
+    
+    let value = {value: this.subgroup.group[this.initio], done: false};
+    this.initio=this.initio + 1;
+      return value;
+    
+    }
+}
+
+Group.prototype[Symbol.iterator] = function() {
+  return new GroupIterator(this);
+};
+
+for (let value of Group.from(["a", "b", "c"])) {
+  console.log(value);
+}
+
+
+</script>
+    
+
+</html>

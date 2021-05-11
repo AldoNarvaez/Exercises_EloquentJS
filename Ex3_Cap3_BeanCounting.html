@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript">
+  
+const countBs = function(t) {
+	var n=t.length;
+    let c=0;
+    for (let s=0; s<n; s=s+1){
+    	if (t[s]=="B"){
+          c=c+1;
+    	}
+    
+    }
+  return c
+}
+
+const countChar = function(t, letter="B") {
+	var n=t.length;
+    let c=0;
+    for (let s=0; s<n; s=s+1){
+    	if (t[s]==letter){
+          c=c+1;
+    	}
+    
+    }
+  return c
+}
+
+console.log(countBs("BCBB"));
+// → 2
+console.log(countChar("kakkerlak", "k"));
+// → 4
+
+
+
+    </script>
+    
+
+</html>

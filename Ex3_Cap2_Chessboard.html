@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript">
+    	let size=Number(prompt("Enter board size: "))
+        
+    	for (let n=1; n<=size ; n= n+1){
+            let arr=[];
+            if (n%2!=0){
+                for (let m=1; m<=size ; m = m+1){
+                
+                    if (m%2!=0){
+                        arr.push(" ");
+                        //console.log("_");
+                    }
+                    else {arr.push("#")}//console.log("#"); }
+                    if (m==size){console.log(arr.join(" ")); }
+               } 
+
+    	    }  
+
+            else if(n%2==0){
+                for (let s=1; s<=size ; s = s+1){
+                
+                    if (s%2!=0){
+                        arr.push("#");
+                        //console.log("#");
+                    }
+                    else {arr.push(" ");}//console.log("_"); }
+                    if (s==size){console.log(arr.join(" ")); }
+               } 
+
+            } 
+    	
+    	}
+
+
+
+    </script>
+    
+
+</html>

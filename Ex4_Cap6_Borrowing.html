@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript">
+ 
+
+let map = {one: false, two: true, hasOwnProperty: true};
+
+//By using this we are able to use the built-in function "hasOwnProperty"
+//as the function per se, and no has a property of the Object
+console.log(Object.prototype.hasOwnProperty)
+//Then with the call(Object, property) method, we are able to apply the object
+//and the input (the properti) to the method/function. In this case: "hasOwnProperty"
+console.log(Object.prototype.hasOwnProperty.call(map, "one"));
+</script>
+    
+
+</html>
