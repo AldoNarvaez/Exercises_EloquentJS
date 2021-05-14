@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript">
+ 
+
+class PGroup {
+  // Your code here.
+  constructor(range) {
+    this.group = range;
+  }
+  //static from(range){
+    //  return new Group(range)
+   //}
+  add(value){
+    if (this.group.includes(value)==false){
+     return new PGroup(this.group.concat([value]));
+    }
+    return this;
+    }
+  delete(value){
+  if (this.group.includes(value)==true){
+    return new PGroup(this.group.filter(v => v !== value));
+  }
+  return this;
+  } 
+  has(value){
+    if (this.group.includes(value)==true){
+    return true}
+   else{return false}
+  }
+}
+
+PGroup.empty = new PGroup([]);
+let a = PGroup.empty.add("a");
+console.log(a);
+let ab = a.add("b");
+console.log(ab);
+let b = ab.delete("a");
+console.log(b);
+
+console.log(ab.has("b"));
+// → true
+console.log(a.has("b"));
+// → false
+console.log(b.has("a"));
+// → false
+</script>
+    
+
+</html>

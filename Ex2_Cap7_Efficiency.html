@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript">
+      const roads = [
+  "Alice's House-Bob's House",   "Alice's House-Cabin",
+  "Alice's House-Post Office",   "Bob's House-Town Hall",
+  "Daria's House-Ernie's House", "Daria's House-Town Hall",
+  "Ernie's House-Grete's House", "Grete's House-Farm",
+  "Grete's House-Shop",          "Marketplace-Farm",
+  "Marketplace-Post Office",     "Marketplace-Shop",
+  "Marketplace-Town Hall",       "Shop-Town Hall"
+]
+
+// Function that defines all the places and the places you are able to from
+function buildGraph(edges) {
+  let graph = Object.create(null);
+  function addEdge(from, to) {
+    if (graph[from] == null) {
+      graph[from] = [to];
+    } else {
+      graph[from].push(to);
+    }
+  }
+  for (let [from, to] of edges.map(r => r.split("-"))) {
+    addEdge(from, to);
+    addEdge(to, from);
+  }
+  return graph;
+}
+
+
+const roadGraph = buildGraph(roads);
+
+class VillageState {
+  constructor(place, parcels) {
+    this.place = place;
+    this.parcels = parcels;
+  }
+
+  move(destination) {
+    if (!roadGraph[this.place].includes(destination)) {
+      return this;
+    } else {
+      let parcels = this.parcels.map(p => {
+        if (p.place != this.place) return p;
+        return {place: destination, address: p.address};
+      }).filter(p => p.place != p.address);
+      return new VillageState(destination, parcels);
+    }
+  }
+}
+
+function findRoute(graph, from, to) {
+  let work = [{at: from, route: []}];
+  for (let i = 0; i < work.length; i++) {
+    let {at, route} = work[i];
+    for (let place of graph[at]) {
+      if (place == to) return route.concat(place);
+      if (!work.some(w => w.at == place)) {
+        work.push({at: place, route: route.concat(place)});
+      }
+    }
+  }
+}
+
+
+      function myRobot({place, parcels}, route) {
+  if (route.length == 0) {
+    // First, we need to know the route the Robot is going to take from the place of start to the place of picking-up
+    let routes = parcels.map(parcel => {
+      if (parcel.place != place) {
+        return {route: findRoute(roadGraph, place, parcel.place),
+                pickUp: true};
+      } else {
+        return {route: findRoute(roadGraph, place, parcel.address),
+                pickUp: false};
+      }
+    });
+
+//Then we compute which of these routes is the one we have less stops and we choose this elements as a direction and seve th other one(s) in the memmory to continue moving forward until the robot finishes its task
+    function score({route, pickUp}) {
+      return (pickUp ? 0.5 : 0) - route.length;
+    }
+    route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
+  }
+
+  return {direction: route[0], memory: route.slice(1)};
+}
+
+//For instance, with this input of parcels, the direction we will have to take (based on the roads that define tha map) i to Alice's house then in the memory, as our next step to optimize the stops, would be Bob's house, and so on.
+let second = new VillageState(
+  "Post Office",
+  [{place: "Bob's House", address: "Alice's House"},{place: "Daria's House", address: "Farm"},{place: "Post Office", address: "Bob's House"}]
+);
+
+console.log(myRobot(second, []));
+
+
+
+</script>
+    
+
+</html>
