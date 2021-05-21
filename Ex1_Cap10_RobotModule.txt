@@ -1,0 +1,16 @@
+Answer to exercise 1: Roads Module. Chapter 10. Eloquent JS book.
+
+First I would make file named road.js where I save the variable roads 
+with all te roads difining the places and the graph from the buildGraph function,
+and use module.exports =  buildGraph(roads). Then I would create another file Village.js 
+with the import class VillageState() and calling roadGraph=require("road.js"). 
+In this manner we are able to have access both the roadGraph and the VillageState 
+class. then in order to create the random states and random pick, let's create a
+different file named random.js, and to have access to the VillageState class we 
+will import VillageState from "./Village" and use exports.module(VillageState.random).
+By doing this, we can create different files for every different Robot, for example,
+we can include the mailRoute vector and the routeRobot in the same .js file and exporting it
+to use this robot in any other program. We can do the same for the findRoute function 
+and the GoalOrientedRobot, of course in this last one, we neer to import one more 
+roadGraph=require("road.js"). Finally, wherever we need a random VillageState we must call
+the random.js file analogously.

@@ -1,0 +1,1 @@
+Due to the fact that require is able to add modules to its cache, so if at the same time we made use require the output will be the current interface, so the new module will be started from there, and not loaded over again. On the other hand, if we try to overwrite by using module.export we are going to get the default object interface.
